@@ -45,11 +45,29 @@ public class JpaMain {
 
             // JPQL
             // 테이블을 대상으로 쿼리를 짜는것이 아니라 객체를 대상으로 쿼리를 작성한다
-            List<Member> result = em.createQuery("select m from Member as m", Member.class).getResultList();
+            /*List<Member> result = em.createQuery("select m from Member as m", Member.class).getResultList();
 
             for (Member member : result) {
                 System.out.println("member.getName() = " + member.getName());
-            }
+            }*/
+
+            // 영속성 컨텍스트 생명주기
+           /*
+           // 엔티티를 생성한 상태(new, 비영속)
+            Member member = new Member();
+            member.setId(2L);
+            member.setName("PersistenceContextTest");
+
+            // 영속(managed)
+            em.persist(member);
+
+            // 준영속(detached); 엔티티를 영속성 컨텍스트에서 분리
+            em.detach(member);
+
+            // 삭제
+            em.remove(member);
+            */
+
             tx.commit();
 
         }catch (Exception e) {
