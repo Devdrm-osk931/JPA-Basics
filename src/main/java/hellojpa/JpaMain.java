@@ -68,6 +68,54 @@ public class JpaMain {
             em.remove(member);
             */
 
+            /*
+            //1차 캐시에서 조회
+            //비영속
+            Member member = new Member();
+            member.setId(2L);
+            member.setName("1stCache");
+
+            //영속
+            em.persist(member);
+
+            //조회
+            // 영속성 컨텍스트의 1차 캐시에서 조회를 해오기 때문에 셀렉트 쿼리문이 나가지 않는다
+            Member findMember = em.find(Member.class, 2L);
+
+            */
+
+            /*
+            // 영속성 컨텍스트에 반영하지 않고 바로 조회를 하는 경우에는 SQL 셀렉트 쿼리문이 나가게 됨
+            Member findMember1 = em.find(Member.class, 2L);
+            // 두번째 조회하는 경우엔 영속성 컨텍스트에서 조회하기 때문에 쿼리가 나가면 안된다!
+            Member findMember2 = em.find(Member.class, 2L);
+            System.out.println("(findMember2 == findMember1) = " + (findMember2 == findMember1));
+            */
+
+            /*Member member1 = new Member(150L, "A");
+            Member member2 = new Member(160L, "B");
+
+            em.persist(member1);
+            em.persist(member2);
+            System.out.println("===========================");
+            // insert 쿼리는 commit() 이후에 발생한다*/
+
+            /*//Dirty Checking
+            Member findMember = em.find(Member.class, 150L);
+            findMember.setName("ChangeDetection");*/
+
+            /*// Flush
+            Member member = new Member(200L, "member200");
+            em.persist(member);
+
+
+            // 직접 flush 호출 - tx.commit 이전에 sql문이 날아감
+            em.flush();*/
+
+
+            Member member = new Member();
+            member.setUsername("Sequence");
+            em.persist(member);
             tx.commit();
 
         }catch (Exception e) {
