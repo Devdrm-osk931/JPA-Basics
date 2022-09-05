@@ -7,15 +7,21 @@ import java.util.Date;
 @Entity
 public class Member {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id @GeneratedValue
+    @Column(name = "MEMBER_ID")
     private Long id;
 
-    @Column(name = "name")
-    private String username;
+    @Column(name = "USERNAME")
+    private String userName;
 
+//    @Column(name = "TEAM_ID")
+//    private Long teamId;
+    @ManyToOne
+    @JoinColumn(name = "TEAM_ID")
+    private Team team;
 
     public Member() {}
+
 
     public Long getId() {
         return id;
@@ -25,11 +31,20 @@ public class Member {
         this.id = id;
     }
 
-    public String getUsername() {
-        return username;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public Team getTeam() {
+        return team;
+    }
+
+    public void setTeam(Team team) {
+        this.team = team;
+        team.getMembers().add(this);
     }
 }

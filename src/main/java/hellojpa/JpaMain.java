@@ -113,9 +113,23 @@ public class JpaMain {
             em.flush();*/
 
 
+            // 저장
+            Team team = new Team();
+            team.setName("TeamA");
+            em.persist(team);
+
             Member member = new Member();
-            member.setUsername("Sequence");
+            member.setUserName("UserA");
+            //연관관계 주인인 멤버에 유관테이블 정보 추가
+            member.setTeam(team);
             em.persist(member);
+
+
+            em.flush();
+            em.clear();
+
+
+
             tx.commit();
 
         }catch (Exception e) {
